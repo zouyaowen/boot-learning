@@ -1,0 +1,51 @@
+server:
+  port: 9091
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/learning?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: 123456
+    connection-init-sqls: set names utf8mb4
+    # 初始化大小，最小，最大
+    initial-size: 5
+    max-active: 10
+    min-idle: 5
+    # 配置获取连接等待超时的时间
+    max-wait: 6000
+  redis:￿￿
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 10
+    lettuce:
+      pool:
+        #max-active在新版本中max-maxTotal
+        max-maxTotal: 32
+        #max-wait在新版本中max-maxWaitMillis
+        max-maxWaitMillis: 300ms
+        # 连接池中的最大空闲连接，默认值是8
+        max-idle: 16
+        #连接池中的最小空闲连接，默认值是0
+        min-idle: 8
+mybatis-plus:
+  mapperLocations: classpath*:/mapper/*Mapper.xml
+  typeAliasesPackage: com.zou.learning.entity.*
+  global-config:
+    idType: 0
+    fieldStrategy: 0
+    dbColumnUnderline: true
+    refreshMapper: true
+    logicDeleteValue: 0
+    logicNotDeleteValue: 1
+  configuration:
+    mapUnderscoreToCamelCase: true
+    cacheEnabled: false
+
+#开启mybatis的sql日志
+logging:
+  level:
+    com.zou.learning.dao: debug
+sensitive-words:
+  path: sensitive.txt
+
